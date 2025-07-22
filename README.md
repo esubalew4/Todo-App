@@ -1,12 +1,20 @@
-# React + Vite
+# Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple powerful Todo application built with React that helps you manage your daily tasks efficiently. Features include adding new tasks, marking tasks as complete, deleting tasks, and automatic saving to localStorage for persistent data.
 
-Currently, two official plugins are available:
+## Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add new tasks - Quickly create tasks with a clean input interface
+- Mark tasks complete - Check/uncheck items with visual feedback (line-through + opacity)
+- Delete tasks - Remove completed or unwanted tasks
+- Persistent storage - Automatically saves to localStorage so your tasks survive page refreshes
+- Responsive design - Clean UI that works well on different screen sizes
+- Expandable tasks - Click on long tasks to view full content
+- Input validation - Prevents adding empty tasks
 
-## Expanding the ESLint configuration
+## Technologies Used:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [React + Vite](https://vite.dev/) (Frontend framework)
+- [Lucide React](https://lucide.dev/) (Beautiful icons)
+- LocalStorage (Persistent data storage)
+- [Tailwind CSS](https://tailwindcss.com/) (Styling)
