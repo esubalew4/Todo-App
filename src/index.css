@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+   --color-primary: rgb(210, 105, 30);
+   --color-input-bg: rgb(214, 220, 223);
+   --color-box: rgb(214, 220, 223);
+}
+
+body {
+   background-color: rgb(180, 194, 201);
+}
