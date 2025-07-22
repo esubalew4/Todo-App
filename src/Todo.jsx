@@ -1,30 +1,43 @@
 import { CheckCircle, Circle, Plus, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Todo = () => {
 
-   const [tasks, setTasks] = useState([])
+   const [tasks, setTasks] = useState(() => {
+      const savedTask = localStorage.getItem('tasks')
+      return savedTask ? JSON.parse(savedTask) : [];
+   })
+
    const [inputValue, setInputValue] = useState('')
    const [displayError, setDisplayError] = useState(false)
    const [expand, setExpand] = useState(null)
-   const [checked, setChecked] = useState([])
+   const [checked, setChecked] = useState(() => {
+       const savedTask = localStorage.getItem('checked')
+      return savedTask ? JSON.parse(savedTask) : [];
+   })
+
+
+   useEffect(() => {
+      // when tasks and checked changes store changed value in localstorage
+      localStorage.setItem('tasks', JSON.stringify(tasks))
+      localStorage.setItem('checked', JSON.stringify(checked))
+   },[tasks,checked])
 
    const handleAddTask = () => {
 
       if(!inputValue.trim() == ""){
-         // if input value is not empty, then add the value of input ito task array
-         setTasks([...tasks, inputValue]) //use spread operator to add as a new value
+         setTasks([...tasks, inputValue])
          setChecked([...checked, false])
-         setInputValue('') // after added task input value will be empty
-         setDisplayError(false) // also dispable error message
+         setInputValue('') //
+         setDisplayError(false)
       }else{
-         setDisplayError(true)  // if input field is empty display error message
+         setDisplayError(true)
       }
    }
 
    const handleDelete = (idx) => {
-      setTasks(tasks.filter((_,i) => i != idx))
-      setChecked(checked.filter((_,i) => i != idx))
+      setTasks(tasks.filter((_,i) => i != idx)) // delete item
+      setChecked(checked.filter((_,i) => i != idx)) // delete checked value for deleted item
    }
 
    const handleExpand = (idx) => {
@@ -33,17 +46,17 @@ const Todo = () => {
    }
 
    const handleChecked = (idx) => {
-      setChecked(!checked)
       setChecked(checked.map((c,i) => i === idx ? !c : c))
    }
+   
   return (
-    <div className='bg-box w-[340px] rounded-xl p-2 shadow/25'>
+    <div className='bg-box w-[90%] sm:w-[400px] rounded-xl p-3 shadow/25'>
 
       {/* input box */}
-      <div className='relative flex bg-input-bg p-1.5 rounded-lg justify-between gap-3 shadow/20'>
+      <div className='relative flex bg-input-bg p-1.5 mb-2 rounded-lg justify-between gap-3 shadow/20'>
          <input onKeyDown={(e) => e.key === "Enter" && handleAddTask()} value={inputValue} onChange={(e) => setInputValue(e.target.value)} type="text" placeholder='Add Your Task...' className='border border-primary outline-0 px-3 flex-1 rounded-lg' />
          <Plus onClick={handleAddTask} className='bg-green-600 text-white rounded-md duration-100 cursor-pointer hover:brightness-110 active:brightness-100 size-9 p-0.5' />
-         <p className={`${displayError ? 'block' : 'hidden'} absolute left-3 -bottom-6 text-[16px] text-red-600`}>Task can't be empty!</p>
+         <p className={`${displayError ? 'block' : 'hidden'} absolute left-4 -bottom-5 text-sm text-red-600`}>Task can't be empty!</p>
       </div>
 
       <ul className='divide-y px-1.5 py-2 mt-1 divide-slate-400'>

@@ -8,4 +8,5 @@
 
 body {
    background-color: rgb(180, 194, 201);
+   overflow-x: hidden;
 }
